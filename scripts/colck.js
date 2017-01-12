@@ -1,28 +1,9 @@
-/*全局变量*/
-var CLOCKDATA =[[[0,0,1,1,1,0,0],[0,1,1,0,1,1,0],[1,1,0,0,0,1,1],[1,1,0,0,0,1,1],[1,1,0,0,0,1,1],[1,1,0,0,0,1,1],[1,1,0,0,0,1,1],[1,1,0,0,0,1,1],[0,1,1,0,1,1,0],[0,0,1,1,1,0,0]],[[0,0,0,1,1,0,0],[0,1,1,1,1,0,0],[0,0,0,1,1,0,0],[0,0,0,1,1,0,0],[0,0,0,1,1,0,0],[0,0,0,1,1,0,0],[0,0,0,1,1,0,0],[0,0,0,1,1,0,0],[0,0,0,1,1,0,0],[1,1,1,1,1,1,1]],[[0,1,1,1,1,1,0],[1,1,0,0,0,1,1],[0,0,0,0,0,1,1],[0,0,0,0,1,1,0],[0,0,0,1,1,0,0],[0,0,1,1,0,0,0],[0,1,1,0,0,0,0],[1,1,0,0,0,0,0],[1,1,0,0,0,1,1],[1,1,1,1,1,1,1]],[[1,1,1,1,1,1,1],[0,0,0,0,0,1,1],[0,0,0,0,1,1,0],[0,0,0,1,1,0,0],[0,0,1,1,1,0,0],[0,0,0,0,1,1,0],[0,0,0,0,0,1,1],[0,0,0,0,0,1,1],[1,1,0,0,0,1,1],[0,1,1,1,1,1,0]],[[0,0,0,0,1,1,0],[0,0,0,1,1,1,0],[0,0,1,1,1,1,0],[0,1,1,0,1,1,0],[1,1,0,0,1,1,0],[1,1,1,1,1,1,1],[0,0,0,0,1,1,0],[0,0,0,0,1,1,0],[0,0,0,0,1,1,0],[0,0,0,1,1,1,1]],[[1,1,1,1,1,1,1],[1,1,0,0,0,0,0],[1,1,0,0,0,0,0],[1,1,1,1,1,1,0],[0,0,0,0,0,1,1],[0,0,0,0,0,1,1],[0,0,0,0,0,1,1],[0,0,0,0,0,1,1],[1,1,0,0,0,1,1],[0,1,1,1,1,1,0]],[[0,0,0,0,1,1,0],[0,0,1,1,0,0,0],[0,1,1,0,0,0,0],[1,1,0,0,0,0,0],[1,1,0,1,1,1,0],[1,1,0,0,0,1,1],[1,1,0,0,0,1,1],[1,1,0,0,0,1,1],[1,1,0,0,0,1,1],[0,1,1,1,1,1,0]],[[1,1,1,1,1,1,1],[1,1,0,0,0,1,1],[0,0,0,0,1,1,0],[0,0,0,0,1,1,0],[0,0,0,1,1,0,0],[0,0,0,1,1,0,0],[0,0,1,1,0,0,0],[0,0,1,1,0,0,0],[0,0,1,1,0,0,0],[0,0,1,1,0,0,0]],[[0,1,1,1,1,1,0],[1,1,0,0,0,1,1],[1,1,0,0,0,1,1],[1,1,0,0,0,1,1],[0,1,1,1,1,1,0],[1,1,0,0,0,1,1],[1,1,0,0,0,1,1],[1,1,0,0,0,1,1],[1,1,0,0,0,1,1],[0,1,1,1,1,1,0]],[[0,1,1,1,1,1,0],[1,1,0,0,0,1,1],[1,1,0,0,0,1,1],[1,1,0,0,0,1,1],[0,1,1,1,0,1,1],[0,0,0,0,0,1,1],[0,0,0,0,0,1,1],[0,0,0,0,1,1,0],[0,0,0,1,1,0,0],[0,1,1,0,0,0,0]],[[0,0,0,0],[0,0,0,0],[0,1,1,0],[0,1,1,0],[0,0,0,0],[0,0,0,0],[0,1,1,0],[0,1,1,0],[0,0,0,0],[0,0,0,0]]];
-
-var winWidth  = 1280;
-var winHeight = 760;
-document.getElementById("cv").style.width = winWidth+"px";
-
-var curTimeSec = 0;
-var balls      = [];
-var ballColor  = ["#009EFC","#00B8FB","#0CD3FA","#F94BA2","#568F62","#B29947","#EF731D","#E1594B","#747762"];
-var radius     = 8;
-
-var numStyle = {
-        top:100,
-        left:180,
-        moveRight:2*(radius+1)
-    };
-/*---------------*/
 
 
 
-/*生成随机十六进制颜色值，！网上扒来的！*/
-function getColor(){  
-    var colorElements = "0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f";  
-    var colorArray = colorElements.split(",");  
+/*生成随机十六进制颜色值 */
+function getColor(){   
+    var colorArray = ["0","1","2","3","4","5",'6',"7","8","9","a","b","c","d","e","f"];  
     var color ="#";  
     for(var i =0;i<6;i++){  
         color+=colorArray[Math.floor(Math.random()*16)];  
@@ -30,17 +11,6 @@ function getColor(){
     return color;  
 }  
 
-
-/*小球类构造函数，有默认参数，需配合updateBalls()函数才能产生动画*/
-function ball(x, y, color, vx, vy, g) {
-    this.x = x || 100;
-    this.y = y || 100;
-    this.color = color || "#8A1515";
-    /*Math.pow(-1, Math.ceil(Math.random()*11))随机生成正负值1*/
-    this.vx = vx || Math.pow(-1, Math.ceil(Math.random()*11)) * (Math.random()*(10-0.618)+0.618);
-    this.vy = vy || Math.pow(-1, Math.ceil(Math.random()*11)) * (Math.random()*(20-0.618)+0.618); 
-    this.g = g || Math.random()*(0.75-0.382)+0.382;
-}
 
 
 /*获取当前系统时间的秒数表示值*/
@@ -51,30 +21,6 @@ function getcurTimeSec() {
     return ret;
 }
 
-
-
-/*主程序函数，循环调用绘制函数和动画数据更新函数*/
-function draw() {
-	var canvas = document.getElementById("canvas");
-	canvas.width = winWidth;
-	canvas.height = winHeight;
-
-	var context = canvas.getContext("2d");
-    
-    //获取系统时间
-    curTimeSec = getcurTimeSec();
-
-    setInterval(
-            function() {
-               
-                drawClock(context);
-                update();
-                updateBalls();
-            },
-            16.67
-        );
-
-}
 
 /* 
  * 控制绘制时钟和小球的函数，
@@ -108,12 +54,17 @@ function drawClock(ct) {
     /*根据小球对象的xy轴数据绘制小球*/
     for(var i = 0; i < balls.length; i++) {
         ct.fillStyle = balls[i].color;
+        ct.strokeStyle = getColor();
+        ct.lineWidth = 2;
 
         ct.beginPath();
         ct.arc(balls[i].x, balls[i].y, radius, 0, 2*3.1415);
         ct.closePath();
-
+        
+        //ct.stroke();
         ct.fill();
+
+
     }
 
 
@@ -160,24 +111,15 @@ function update() {
         }
 
     }
-   
-        while(balls.length > 401) {
-            balls.shift();
-        }
-    
-        //console.log(balls.length);
-    
-    
-   
- 
+        
 }
 
-//小球下落动画位置更新函数
+//小球下落动画位置更新与碰撞检测函数
 function updateBalls() {
     for(var i = 0; i < balls.length; i++) {
         balls[i].x  += balls[i].vx;
         balls[i].y  += balls[i].vy;
-        balls[i].vy += balls[i].g;
+        balls[i].vy += balls[i].g*1.236;
     
 
         if(balls[i].y >= winHeight - radius) {
@@ -187,8 +129,12 @@ function updateBalls() {
 
         if(balls[i].y <=  radius) {
             balls[i].y = radius;
-            balls[i].vy = -balls[i].vy*0.9;
-            
+            balls[i].vy = -balls[i].vy*0.9;  
+        }
+
+        if(balls[i].x >= winWidth - radius && balls[i].y < winHeight-(winHeight/10)) {
+            balls[i].x = winWidth - radius;
+            balls[i].vx = -balls[i].vx;
         }
     }
 }
@@ -204,16 +150,26 @@ function addBalls(x, y, num) {
                                         x+j*(radius+0.2)*2, 
                                         y+i*(radius+1)*2,
                                         getColor()//ballColor[Math.floor(Math.random()*ballColor.length)]
+                                        
                                         );
-
+                    //设置小球运动速度的随机范围
+                    aBall.alterVYXMaxMin(V.xMax,V.xMin,V.yMax,V.yMin);
+                    //console.log(aBall);
                     balls.push(aBall);
                 }
 
             }
         }
+        //控制小球的总数，大于设定值时，shift掉数值前面的球
+        while(balls.length > ballsCache) {
+            balls.shift();
+
+        }
+         //console.log(balls.length);
 
 }
 
+//根据CLOCKDATA全局变量提供的数据绘制时钟
 function renderDigit(x, y, radius, num, ct) {
 
     ct.fillStyle = "#2E8CA8";
@@ -233,6 +189,28 @@ function renderDigit(x, y, radius, num, ct) {
 
 }
 
+/*主程序函数，循环调用绘制函数和动画数据更新函数*/
+function draw() {
+    var canvas = document.getElementById("canvas");
+    canvas.width = winWidth;
+    canvas.height = winHeight;
+
+    var context = canvas.getContext("2d");
+    
+    //获取系统时间
+    curTimeSec = getcurTimeSec();
+
+    setInterval(
+            function() {
+               
+                drawClock(context);
+                update();
+                updateBalls();
+            },
+            refreshRate
+        );
+
+}
 
 
 function addLoadEvent(func){  
