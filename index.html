@@ -9,21 +9,42 @@
 	}
 	#cv{
 		width: 800px;
-		margin: 0 auto;
+		display: inline-block;
 	}
 	#canvas{
-		margin: 0 auto;
 		border: 1px solid #414141;
-
+	}
+	.center{
+		margin: 0 auto;
+	}
+	#console{
+		width: 450px;
+		float:right;
 	}
 	</style>
 </head>
 <body>
 	<div id="cv">
-		<canvas id="canvas" width="800" height="600">该升级浏览器了</canvas>
-		<p>没优化移动端，性能超差</p>
-	<div>
+		<canvas id="canvas" width="800" height="600">
+			该升级浏览器了
+		</canvas>
+		<p>不会优化移动端，性能超差</p>
+	</div>
+	<div id="console">
+		<ul>
+			<input type="button" value="应用" id="button">
+			<li>刷新率</li>
+			<li><input type="range" id="refreshRateRange"></li>
+			<li>小球量最大值</li>
+			<li><input type="range" id="ballsCacheRange"></li>
+			<li>x轴初速随机范围</li>
+			<li><input type="range" id="VXMinRange">到<input type="range" id="VXMaxRange"></li>
+			<li>y轴初速随机范围</li>
+			<li><input type="range" id="VYMinRange">到<input type="range" id="VYMaxRange"></li>
+		</ul>
+	</div>
 	<script src="scripts/clock.ini.js"></script>
-	<script src="scripts/colck.js"></script>
+	<script src="scripts/clock.js"></script>
+	<script src="scripts/consoleForClock.js"></script>
 </body>
 </html>
