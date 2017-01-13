@@ -18,14 +18,16 @@ irvyxr.defaultValue = V.yMax;
 
 ib.onclick = function() {
 
-	refreshRate = irrrr.value;
-	ballsCache = irbcr.value*10;
+	refreshRate = parseInt(irrrr.value);
+	ballsCache = parseInt(irbcr.value)*10;
 
-	V.xMin = irvxmr.value;
-	V.xMax = irvxxr.value;
+	V.xMin = parseInt(irvxmr.value);
+	V.xMax = parseInt(irvxxr.value);
 
-	V.yMin = irvymr.value;
-	V.yMax = irvyxr.value;
+	V.yMin = parseInt(irvymr.value);
+	V.yMax = parseInt(irvyxr.value);
+
+	console.log("console:"+V.xMin+" "+V.xMax);
 
  	clearInterval(MAKE);
 	draw();

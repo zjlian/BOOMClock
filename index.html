@@ -4,22 +4,27 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<style>
-	body{
-		background: url(bg.gif);
+	*{
+		margin:0;
+		padding:0;
+	}
+	#cv,#console{
+		display: inline-block;
 	}
 	#cv{
 		width: 800px;
-		display: inline-block;
 	}
 	#canvas{
 		border: 1px solid #414141;
 	}
-	.center{
-		margin: 0 auto;
-	}
 	#console{
-		width: 450px;
-		float:right;
+		width: 300px;
+	}
+	ul li{
+		padding-top: 10px;
+	}
+	#button{
+		padding:10px 50px;	
 	}
 	</style>
 </head>
@@ -33,14 +38,19 @@
 	<div id="console">
 		<ul>
 			<input type="button" value="应用" id="button">
-			<li>刷新率</li>
+			<li>刷新率(0~100) (默认16)</li>
 			<li><input type="range" id="refreshRateRange"></li>
-			<li>小球量最大值</li>
-			<li><input type="range" id="ballsCacheRange"></li>
-			<li>x轴初速随机范围</li>
-			<li><input type="range" id="VXMinRange">到<input type="range" id="VXMaxRange"></li>
+			<li>绘制最大小球数量(0|100~1000)</li>
+			<li>
+				<p>(默认353,应用后滑动条值*10为实际值)</p>
+				<input type="range" id="ballsCacheRange">
+			</li>
+			<li>x轴初速随机范围(0~100)</li>
+			<li>Min:<input type="range" id="VXMinRange"></li>
+			<li>Max:<input type="range" id="VXMaxRange"></li>
 			<li>y轴初速随机范围</li>
-			<li><input type="range" id="VYMinRange">到<input type="range" id="VYMaxRange"></li>
+			<li>Min:<input type="range" id="VYMinRange"></li>
+			<li>Max:<input type="range" id="VYMaxRange"></li>
 		</ul>
 	</div>
 	<script src="scripts/clock.ini.js"></script>

@@ -159,6 +159,7 @@ function updateBalls() {
     while(balls.length > ballsCache) { balls.shift(); }       
 
     for(var i = 0; i < balls.length; i++) {
+
         balls[i].x  += balls[i].vx;
         balls[i].y  += balls[i].vy;
         balls[i].vy += balls[i].g*1.236;
@@ -166,7 +167,7 @@ function updateBalls() {
 
         if(balls[i].y >= winHeight - radius) {
             balls[i].y = winHeight - radius;
-            balls[i].vy = -balls[i].vy * balls[i].g;
+            balls[i].vy = -balls[i].vy* balls[i].g;
         }
 
         if(balls[i].y <=  radius) {
@@ -201,6 +202,7 @@ function addBalls(x, y, num) {
                                         );
                     //设置小球运动速度的随机范围
                     aBall.alterVYXMaxMin(V.xMax,V.xMin,V.yMax,V.yMin);
+
                     //console.log(aBall);
                     balls.push(aBall);
                 }
