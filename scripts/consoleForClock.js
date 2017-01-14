@@ -1,5 +1,6 @@
 /*时钟特效样式控制组件生成组件*/
 var ib = document.getElementById("button");
+var ic = document.getElementById("clear");
 
 var irrrr = document.getElementById("refreshRateRange");
 var irbcr = document.getElementById("ballsCacheRange");
@@ -27,8 +28,13 @@ ib.onclick = function() {
 	V.yMin = parseInt(irvymr.value);
 	V.yMax = parseInt(irvyxr.value);
 
-	console.log("console:"+V.xMin+" "+V.xMax);
-
+	//console.log("console:"+V.xMin+" "+V.xMax);
  	clearInterval(MAKE);
 	draw();
+}
+
+ic.onclick = function() {
+	balls      = [];
+	//clearInterval(MAKE);
+	//draw();
 }

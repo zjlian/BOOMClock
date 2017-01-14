@@ -155,16 +155,30 @@ function update() {
 
 //小球下落动画位置更新与碰撞检测函数
 function updateBalls() {
-    //控制小球的总数，大于设定值时，shift掉数值前面的球
-    while(balls.length > ballsCache) { balls.shift(); }       
-
+    //控制小球的总数，大于设定值时，pop掉无效的的小球
+    var effect = 0;
     for(var i = 0; i < balls.length; i++) {
+        if(balls[i].x > -radius && balls[i].x < winWidth + radius) {
+            balls[effect++] = balls[i];
+        }
+    }
+    while(balls.length > (effect > ballsCache ? ballsCache : effect)) {
+        balls.pop();
+    }
+   
+   while(balls.length >= ballsCache - Math.floor(ballsCache/10)) {
+    balls.shift();
+   }
+    
 
+    console.log(balls.length);
+    for(var i = 0; i < balls.length; i++) {
+        //更新小球位置
         balls[i].x  += balls[i].vx;
         balls[i].y  += balls[i].vy;
         balls[i].vy += balls[i].g*1.236;
     
-
+        //碰撞检测
         if(balls[i].y >= winHeight - radius) {
             balls[i].y = winHeight - radius;
             balls[i].vy = -balls[i].vy* balls[i].g;
@@ -175,12 +189,12 @@ function updateBalls() {
             balls[i].vy = -balls[i].vy*0.9;  
         }
 
-        if(balls[i].x >= winWidth - radius && balls[i].y < winHeight-(winHeight/10)) {
+        if(balls[i].x >= winWidth - radius && balls[i].y < winHeight-(winHeight/10) && balls[i].y > 2*radius) {
             balls[i].x = winWidth - radius;
             balls[i].vx = -balls[i].vx;
         }
 
-        if(balls[i].x <= radius && balls[i].y < winHeight-(winHeight/10)) {
+        if(balls[i].x <= radius && balls[i].y < winHeight-(winHeight/10) && balls[i].y > 2*radius) {
             balls[i].x = radius;
             balls[i].vx = -balls[i].vx;
         }
